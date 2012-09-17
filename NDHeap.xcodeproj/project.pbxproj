@@ -1,0 +1,241 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D8B9B61816073F9000DCAEA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B9B61716073F9000DCAEA7 /* Foundation.framework */; };
+		D8B9B61B16073F9000DCAEA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B9B61A16073F9000DCAEA7 /* main.m */; };
+		D8B9B61F16073F9000DCAEA7 /* NDHeap.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D8B9B61E16073F9000DCAEA7 /* NDHeap.1 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		D8B9B61116073F9000DCAEA7 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				D8B9B61F16073F9000DCAEA7 /* NDHeap.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		D8B9B61316073F9000DCAEA7 /* NDHeap */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NDHeap; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8B9B61716073F9000DCAEA7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D8B9B61A16073F9000DCAEA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D8B9B61D16073F9000DCAEA7 /* NDHeap-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NDHeap-Prefix.pch"; sourceTree = "<group>"; };
+		D8B9B61E16073F9000DCAEA7 /* NDHeap.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = NDHeap.1; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D8B9B61016073F9000DCAEA7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8B9B61816073F9000DCAEA7 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D8B9B60816073F9000DCAEA7 = {
+			isa = PBXGroup;
+			children = (
+				D8B9B61916073F9000DCAEA7 /* NDHeap */,
+				D8B9B61616073F9000DCAEA7 /* Frameworks */,
+				D8B9B61416073F9000DCAEA7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D8B9B61416073F9000DCAEA7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D8B9B61316073F9000DCAEA7 /* NDHeap */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D8B9B61616073F9000DCAEA7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D8B9B61716073F9000DCAEA7 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D8B9B61916073F9000DCAEA7 /* NDHeap */ = {
+			isa = PBXGroup;
+			children = (
+				D8B9B61A16073F9000DCAEA7 /* main.m */,
+				D8B9B61E16073F9000DCAEA7 /* NDHeap.1 */,
+				D8B9B61C16073F9000DCAEA7 /* Supporting Files */,
+			);
+			path = NDHeap;
+			sourceTree = "<group>";
+		};
+		D8B9B61C16073F9000DCAEA7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D8B9B61D16073F9000DCAEA7 /* NDHeap-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D8B9B61216073F9000DCAEA7 /* NDHeap */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8B9B62216073F9000DCAEA7 /* Build configuration list for PBXNativeTarget "NDHeap" */;
+			buildPhases = (
+				D8B9B60F16073F9000DCAEA7 /* Sources */,
+				D8B9B61016073F9000DCAEA7 /* Frameworks */,
+				D8B9B61116073F9000DCAEA7 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NDHeap;
+			productName = NDHeap;
+			productReference = D8B9B61316073F9000DCAEA7 /* NDHeap */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D8B9B60A16073F9000DCAEA7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Nathan Day";
+			};
+			buildConfigurationList = D8B9B60D16073F9000DCAEA7 /* Build configuration list for PBXProject "NDHeap" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D8B9B60816073F9000DCAEA7;
+			productRefGroup = D8B9B61416073F9000DCAEA7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D8B9B61216073F9000DCAEA7 /* NDHeap */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D8B9B60F16073F9000DCAEA7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8B9B61B16073F9000DCAEA7 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D8B9B62016073F9000DCAEA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		D8B9B62116073F9000DCAEA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		D8B9B62316073F9000DCAEA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NDHeap/NDHeap-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D8B9B62416073F9000DCAEA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "NDHeap/NDHeap-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D8B9B60D16073F9000DCAEA7 /* Build configuration list for PBXProject "NDHeap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8B9B62016073F9000DCAEA7 /* Debug */,
+				D8B9B62116073F9000DCAEA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8B9B62216073F9000DCAEA7 /* Build configuration list for PBXNativeTarget "NDHeap" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8B9B62316073F9000DCAEA7 /* Debug */,
+				D8B9B62416073F9000DCAEA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D8B9B60A16073F9000DCAEA7 /* Project object */;
+}
