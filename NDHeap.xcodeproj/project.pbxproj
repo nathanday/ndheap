@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		D8B9B61816073F9000DCAEA7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D8B9B61716073F9000DCAEA7 /* Foundation.framework */; };
 		D8B9B61B16073F9000DCAEA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B9B61A16073F9000DCAEA7 /* main.m */; };
-		D8B9B61F16073F9000DCAEA7 /* NDHeap.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = D8B9B61E16073F9000DCAEA7 /* NDHeap.1 */; };
+		D8B9B62716073FAD00DCAEA7 /* NDHeap.m in Sources */ = {isa = PBXBuildFile; fileRef = D8B9B62616073FAD00DCAEA7 /* NDHeap.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -19,21 +19,29 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				D8B9B61F16073F9000DCAEA7 /* NDHeap.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D8A500C1161B2E1A00E5A4C3 /* UnitTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8B9B61316073F9000DCAEA7 /* NDHeap */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NDHeap; sourceTree = BUILT_PRODUCTS_DIR; };
 		D8B9B61716073F9000DCAEA7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		D8B9B61A16073F9000DCAEA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D8B9B61D16073F9000DCAEA7 /* NDHeap-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NDHeap-Prefix.pch"; sourceTree = "<group>"; };
-		D8B9B61E16073F9000DCAEA7 /* NDHeap.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = NDHeap.1; sourceTree = "<group>"; };
+		D8B9B62516073FAD00DCAEA7 /* NDHeap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NDHeap.h; sourceTree = "<group>"; };
+		D8B9B62616073FAD00DCAEA7 /* NDHeap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NDHeap.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		D8A500BD161B2E1A00E5A4C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D8B9B61016073F9000DCAEA7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -58,6 +66,7 @@
 			isa = PBXGroup;
 			children = (
 				D8B9B61316073F9000DCAEA7 /* NDHeap */,
+				D8A500C1161B2E1A00E5A4C3 /* UnitTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -74,7 +83,8 @@
 			isa = PBXGroup;
 			children = (
 				D8B9B61A16073F9000DCAEA7 /* main.m */,
-				D8B9B61E16073F9000DCAEA7 /* NDHeap.1 */,
+				D8B9B62516073FAD00DCAEA7 /* NDHeap.h */,
+				D8B9B62616073FAD00DCAEA7 /* NDHeap.m */,
 				D8B9B61C16073F9000DCAEA7 /* Supporting Files */,
 			);
 			path = NDHeap;
@@ -91,6 +101,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		D8A500C0161B2E1A00E5A4C3 /* UnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8A500D6161B2E1A00E5A4C3 /* Build configuration list for PBXNativeTarget "UnitTests" */;
+			buildPhases = (
+				D8A500BC161B2E1A00E5A4C3 /* Sources */,
+				D8A500BD161B2E1A00E5A4C3 /* Frameworks */,
+				D8A500BE161B2E1A00E5A4C3 /* Resources */,
+				D8A500BF161B2E1A00E5A4C3 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = UnitTests;
+			productName = UnitTests;
+			productReference = D8A500C1161B2E1A00E5A4C3 /* UnitTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		D8B9B61216073F9000DCAEA7 /* NDHeap */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D8B9B62216073F9000DCAEA7 /* Build configuration list for PBXNativeTarget "NDHeap" */;
@@ -130,22 +158,83 @@
 			projectRoot = "";
 			targets = (
 				D8B9B61216073F9000DCAEA7 /* NDHeap */,
+				D8A500C0161B2E1A00E5A4C3 /* UnitTests */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		D8A500BE161B2E1A00E5A4C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D8A500BF161B2E1A00E5A4C3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		D8A500BC161B2E1A00E5A4C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		D8B9B60F16073F9000DCAEA7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				D8B9B61B16073F9000DCAEA7 /* main.m in Sources */,
+				D8B9B62716073FAD00DCAEA7 /* NDHeap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		D8A500D4161B2E1A00E5A4C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UnitTests/UnitTests-Prefix.pch";
+				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		D8A500D5161B2E1A00E5A4C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "UnitTests/UnitTests-Prefix.pch";
+				INFOPLIST_FILE = "UnitTests/UnitTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		D8B9B62016073F9000DCAEA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -218,6 +307,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		D8A500D6161B2E1A00E5A4C3 /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8A500D4161B2E1A00E5A4C3 /* Debug */,
+				D8A500D5161B2E1A00E5A4C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		D8B9B60D16073F9000DCAEA7 /* Build configuration list for PBXProject "NDHeap" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -234,6 +332,7 @@
 				D8B9B62416073F9000DCAEA7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
