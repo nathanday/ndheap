@@ -29,9 +29,9 @@ static const NSUInteger			kConcurrentFragmentSize = 100;
 
 static inline NSUInteger parentIndexOfNodeIndex( NSUInteger n ) { NSCParameterAssert(n > 0); return (n-1)>>1; }
 static inline NSUInteger childrenIndiciesOfNodeIndex( NSUInteger n ) { return (n<<1)+1; }
-static inline void swapObjects( id * a, id * b ) { id  temp = *a; *a = *b; *b = temp; }
+static inline void swapObjects( __strong id * a, __strong id * b ) { id  temp = *a; *a = *b; *b = temp; }
 
-static BOOL verifyHeapState( id * aHeap, NSUInteger aCount, NSComparator aComparator )
+static BOOL verifyHeapState( __strong id * aHeap, NSUInteger aCount, NSComparator aComparator )
 {
 	BOOL		theResult = YES;
 	/*
@@ -46,7 +46,7 @@ static BOOL verifyHeapState( id * aHeap, NSUInteger aCount, NSComparator aCompar
 	return theResult;
 }
 
-static void downHeapNodeN( id * a, NSUInteger c, NSComparator aComparator, NSUInteger n )
+static void downHeapNodeN( __strong id * a, NSUInteger c, NSComparator aComparator, NSUInteger n )
 {
 	NSUInteger	theChildIndex = childrenIndiciesOfNodeIndex( n );
 	if( theChildIndex < c )
@@ -65,7 +65,7 @@ static void downHeapNodeN( id * a, NSUInteger c, NSComparator aComparator, NSUIn
 	}
 }
 
-static void upHeapNodeN( id * a, NSUInteger c, NSComparator aComparator, NSUInteger n )
+static void upHeapNodeN( __strong id * a, NSUInteger c, NSComparator aComparator, NSUInteger n )
 {
 	if( n > 0 )
 	{
@@ -78,7 +78,7 @@ static void upHeapNodeN( id * a, NSUInteger c, NSComparator aComparator, NSUInte
 	}
 }
 
-static void heapifyArray( id * a, NSUInteger c, NSComparator aComparator )
+static void heapifyArray( __strong id * a, NSUInteger c, NSComparator aComparator )
 {
 	for( NSInteger i = c>>1; i >= 0; i-- )
 		downHeapNodeN( a, c, aComparator, i );
@@ -86,10 +86,10 @@ static void heapifyArray( id * a, NSUInteger c, NSComparator aComparator )
 
 @interface NDHeapEnumerator : NSEnumerator
 {
-	NDHeap			* _heap;
-	__strong id		* _everyObject;
-	NSUInteger		_position,
-					_count;
+	__strong NDHeap					* _heap;
+	__unsafe_unretained const id	* _everyObject;
+	NSUInteger						_position,
+									_count;
 }
 
 - (id)initWithHeap:(NDHeap *)aHeap everyObject:(const id*)anEveryObject;
@@ -151,7 +151,7 @@ static void addObjects( NDHeap * self, va_list anArgList, id aFirstObject )
 		{
 			if( self->_size == 0 ) self->_size = 1;
 			while( self->_count >= self->_size ) self->_size <<= 1;
-			self->_everyObject = reallocf( self->_everyObject, self->_size*sizeof(*self->_everyObject) );
+			self->_everyObject = (__strong id*)reallocf( self->_everyObject, self->_size*sizeof(*self->_everyObject) );
 			NSCAssert( self->_everyObject != nil, @"memory error" );
 		}
 #if !__has_feature(objc_arc)
@@ -164,7 +164,7 @@ static void addObjects( NDHeap * self, va_list anArgList, id aFirstObject )
 	heapifyArray( self->_everyObject, self->_count, self->_comparator );
 }
 
-static void addNObjects( NDHeap * self, const id * anObjects, NSUInteger aCount )
+static void addNObjects( NDHeap * self, const __strong id * anObjects, NSUInteger aCount )
 {
 	NSUInteger		theOriginalCount = self->_count;
 	self->_count += aCount;
@@ -176,7 +176,7 @@ static void addNObjects( NDHeap * self, const id * anObjects, NSUInteger aCount 
 		NSCAssert( self->_everyObject != nil, @"memory error" );
 	}
 #if __has_feature(objc_arc)
-	memcpy( (void*)&(self->_everyObject[theOriginalCount]), anObjects, aCount*sizeof(*anObjects) );
+	memcpy( (void*)&(self->_everyObject[theOriginalCount]), (void*)anObjects, aCount*sizeof(*anObjects) );
 #else
 	for( NSUInteger i = 0; i < aCount; i++ )
 		self->_everyObject[theOriginalCount+i] = [anObjects[i] retain];
@@ -220,7 +220,7 @@ static void addArray( NDHeap * self, NSArray * anArray )
 #endif
 }
 
-+ (id)heapWithComparator:(NSComparator)aComparator objects:(id *)anArray count:(NSUInteger)aCount
++ (id)heapWithComparator:(NSComparator)aComparator objects:(const id *)anArray count:(NSUInteger)aCount
 {
 #if __has_feature(objc_arc)
 	return [[self alloc] initWithComparator:aComparator objects:anArray count:aCount];
@@ -270,7 +270,7 @@ static void addArray( NDHeap * self, NSArray * anArray )
 	return self;
 }
 
-- (id)initWithComparator:(NSComparator)aComparator objects:(id *)anObjects count:(NSUInteger)aCount
+- (id)initWithComparator:(NSComparator)aComparator objects:(const id *)anObjects count:(NSUInteger)aCount
 {
 	if( (self = [self initWithComparator:aComparator]) != nil )
 	{
@@ -598,13 +598,14 @@ NSUInteger recursiveCountContainsObject( NDHeap * self, NSUInteger aNodeNumber, 
 
 @implementation NDHeapEnumerator
 
-- (id)initWithHeap:(NDHeap *)aHeap everyObject:(const id*)anEveryObject
+- (id)initWithHeap:(NDHeap *)aHeap everyObject:(__strong const id*)anEveryObject
 {
 	if( (self = [super init]) != nil )
 	{
+#if __has_feature(objc_arc)
 		_heap = aHeap;
-#if !__has_feature(objc_arc)
-		[aHeap retain];
+#else
+		_heap = [aHeap retain];
 #endif
 		_everyObject = anEveryObject;
 		_count = aHeap.count;
@@ -613,8 +614,31 @@ NSUInteger recursiveCountContainsObject( NDHeap * self, NSUInteger aNodeNumber, 
 	return self;
 }
 
+#if !__has_feature(objc_arc)
+- (void)dealloc
+{
+	[_heap release];
+	[super dealloc];
+}
+#endif
+
 - (NSArray *)allObjects { return [NSArray arrayWithObjects:&_everyObject[_position] count:_count-_position]; }
-- (id)nextObject { return _position < _count ? _everyObject[_position++] : nil; }
+- (id)nextObject
+{
+	id	theResult = nil;
+	if( _position < _count && _everyObject != NULL )
+		theResult = _everyObject[_position++];
+	else
+	{
+		_everyObject = NULL;
+#if __has_feature(objc_arc)
+		_heap = nil;
+#else
+		[_heap release], _heap = nil;
+#endif
+	}
+	return theResult;
+}
 
 @end
 

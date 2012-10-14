@@ -16,7 +16,7 @@ static NSArray * sampleArray();
 static NDHeap * sampleHeap();
 
 static void testCreation();
-static void testAdding();
+static void testaddObject_();
 static void testFastEnumeration();
 static void testNSEnumeration();
 static void testBlockEnumeration();
@@ -37,11 +37,14 @@ static void testAddObjectsFromHeap();
 
 int main(int argc, const char * argv[])
 {
+#if __has_feature(objc_arc)
+#warning Automatic Reference Counting on
+#endif
 	@autoreleasepool
 	{
 		fprintf( stderr, "Heap test start\n" );
 		testCreation();
-		testAdding();
+		testaddObject_();
 		testFastEnumeration();
 		testNSEnumeration();
 		testBlockEnumeration();
@@ -67,14 +70,14 @@ void testCreation()
 {
 	fprintf( stderr, "...test creation\n" );
 	NSUInteger			theExpectedCount = [sampleArray() count];
-	NDHeap				* theHeap = sampleHeap();
+	NDHeap				* theHeap = [NDHeap heapWithComparator:^(id a, id b){return [a compare:b];} array:sampleArray()];
 	NSCAssert(theHeap.count == theExpectedCount, @"Got %lu, expected %lu", theHeap.count, theExpectedCount );
 }
 
-void testAdding()
+void testaddObject_()
 {
-	fprintf( stderr, "...test adding\n" );
-	NDMutableHeap		* theHeap = [[NDMutableHeap alloc] initWithComparator:^(id a, id b){return [a compare:b];} array:sampleArray()];
+	fprintf( stderr, "...test addObject:\n" );
+	NDMutableHeap		* theHeap = [NDMutableHeap heapWithComparator:^(id a, id b){return [a compare:b];} array:sampleArray()];
 	NSUInteger			theExpectedCount = [sampleArray() count];
 	for( id theObject in sampleArray() )
 		[theHeap addObject:theObject];
@@ -92,7 +95,9 @@ void testFastEnumeration()
 		[theEveryObject removeObject:theNumber];
 	NSCAssert(theEveryObject.count == 0, @"Got %lu, expected 0", theHeap.count );
 	NSCAssert(theHeap.count == theExpectedCount, @"Got %lu, expected %lu", theHeap.count, theExpectedCount );
+#if !__has_feature(objc_arc)
 	[theEveryObject release];
+#endif
 }
 
 void testNSEnumeration()
@@ -107,7 +112,9 @@ void testNSEnumeration()
 		[theEveryObject removeObject:theNumber];
 	NSCAssert(theEveryObject.count == 0, @"Got %lu, expected 0", theHeap.count );
 	NSCAssert(theHeap.count == theExpectedCount, @"Got %lu, expected %lu", theHeap.count, theExpectedCount );
+#if !__has_feature(objc_arc)
 	[theEveryObject release];
+#endif
 }
 
 void testBlockEnumeration()
@@ -119,7 +126,9 @@ void testBlockEnumeration()
 	[theHeap enumerateObjectsUsingBlock:^(NSNumber * aNumber, BOOL * aStop) { [theEveryObject removeObject:aNumber]; }];
 	NSCAssert(theEveryObject.count == 0, @"Got %lu, expected 0", theHeap.count );
 	NSCAssert(theHeap.count == theExpectedCount, @"Got %lu, expected %lu", theHeap.count, theExpectedCount );
+#if !__has_feature(objc_arc)
 	[theEveryObject release];
+#endif
 }
 
 void testMakeObjectsPerformSelector_object_()
@@ -146,7 +155,9 @@ void testPopAllObjects()
 			NSCParameterAssert( theNumber.integerValue >= thePreviousNumber.integerValue );
 		thePreviousNumber = theNumber;
 	}
+#if !__has_feature(objc_arc)
 	[theHeap release];
+#endif
 }
 
 void testIsEqualToHeap_()

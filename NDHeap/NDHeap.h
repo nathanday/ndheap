@@ -33,13 +33,13 @@
 
 
 + (id)heapWithComparator:(NSComparator)comparator objects:(id)array, ...;
-+ (id)heapWithComparator:(NSComparator)comparator objects:(id *)array count:(NSUInteger)count;
++ (id)heapWithComparator:(NSComparator)comparator objects:(const id *)array count:(NSUInteger)count;
 + (id)heapWithComparator:(NSComparator)comparator array:(NSArray *)array;
 + (id)heapWithComparator:(NSComparator)comparator;
 
 - (id)initWithComparator:(NSComparator)comparator objects:(id)array, ...;
 - (id)initWithComparator:(NSComparator)comparator arguments:(va_list)arguments firstObject:(id)firstObject;
-- (id)initWithComparator:(NSComparator)comparator objects:(id *)array count:(NSUInteger)count;
+- (id)initWithComparator:(NSComparator)comparator objects:(const id *)array count:(NSUInteger)count;
 - (id)initWithComparator:(NSComparator)comparator array:(NSArray *)array;
 - (id)initWithComparator:(NSComparator)comparator;
 
