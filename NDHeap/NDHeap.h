@@ -27,21 +27,21 @@
 
 @interface NDHeap : NSObject <NSFastEnumeration,NSCopying,NSMutableCopying>
 
-@property(readonly,nonatomic)		NSComparisonResult (*comparator)(id, id);
+@property(readonly,nonatomic)		NSComparator		comparator;
 @property(readonly,nonatomic)		NSUInteger			count;
 @property(readonly,nonatomic)		id					minimumObject;
 
 
-+ (id)heapWithComparator:(NSComparisonResult (*)(id, id))comparator objects:(id)array, ...;
-+ (id)heapWithComparator:(NSComparisonResult (*)(id, id))comparator objects:(id *)array count:(NSUInteger)count;
-+ (id)heapWithComparator:(NSComparisonResult (*)(id, id))comparator array:(NSArray *)array;
-+ (id)heapWithComparator:(NSComparisonResult (*)(id, id))comparator;
++ (id)heapWithComparator:(NSComparator)comparator objects:(id)array, ...;
++ (id)heapWithComparator:(NSComparator)comparator objects:(id *)array count:(NSUInteger)count;
++ (id)heapWithComparator:(NSComparator)comparator array:(NSArray *)array;
++ (id)heapWithComparator:(NSComparator)comparator;
 
-- (id)initWithComparator:(NSComparisonResult (*)(id, id))comparator objects:(id)array, ...;
-- (id)initWithComparator:(NSComparisonResult (*)(id, id))comparator arguments:(va_list)arguments firstObject:(id)firstObject;
-- (id)initWithComparator:(NSComparisonResult (*)(id, id))comparator objects:(id *)array count:(NSUInteger)count;
-- (id)initWithComparator:(NSComparisonResult (*)(id, id))comparator array:(NSArray *)array;
-- (id)initWithComparator:(NSComparisonResult (*)(id, id))comparator;
+- (id)initWithComparator:(NSComparator)comparator objects:(id)array, ...;
+- (id)initWithComparator:(NSComparator)comparator arguments:(va_list)arguments firstObject:(id)firstObject;
+- (id)initWithComparator:(NSComparator)comparator objects:(id *)array count:(NSUInteger)count;
+- (id)initWithComparator:(NSComparator)comparator array:(NSArray *)array;
+- (id)initWithComparator:(NSComparator)comparator;
 
 - (NSArray *)everyObject;
 
@@ -60,19 +60,20 @@
 - (void)setValue:(id)value forKey:(NSString *)key;
 - (id)valueForKey:(NSString *)key;
 
+- (NDHeap *)filteredHeapUsingPredicate:(NSPredicate *)predicate;
 - (NSArray *)filteredArrayUsingPredicate:(NSPredicate *)predicate;
 
 @end
 
 @interface NDMutableHeap : NDHeap
 
-- (id)initWithComparator:(NSComparisonResult (*)(id, id))comparator capacity:(NSUInteger)numItems;
+- (id)initWithComparator:(NSComparator)comparator capacity:(NSUInteger)numItems;
 
 - (void)removeMinimumObject;
 - (void)addObject:(id)object;
 
-- (void)addArray:(NSArray *)array;
-- (void)addHeap:(NDHeap *)heap;
+- (void)addObjectsFromArray:(NSArray *)array;
+- (void)addObjectsFromHeap:(NDHeap *)heap;
 
 - (void)removeAllObjects;
 
