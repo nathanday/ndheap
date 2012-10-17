@@ -171,7 +171,7 @@ void testIsEqualToHeap_()
 		[theCompareHeap addObject:[NSNumber numberWithInteger:theObject.integerValue]];
 		if( theHeap.count == theCompareHeap.count )
 		{
-			[theCompareHeap2 addObject:[NSNumber numberWithInteger:-2000]];
+			[theCompareHeap2 addObject:[NSNumber numberWithInteger:theObject.integerValue+1]];
 			NSCParameterAssert( [theHeap isEqual:theCompareHeap] );
 			NSCParameterAssert( ![theHeap isEqual:theCompareHeap2] );
 		}
@@ -256,30 +256,37 @@ void testRemoveMinimumObject()
 {
 	fprintf( stderr, "...test removeMinimumObject\n" );
 	NDMutableHeap		* theHeap = [NDMutableHeap heapWithComparator:^(id a, id b){return [a compare:b];} array:sampleArray()];
-	NSUInteger			theMatchCount[2] = {0,0};
+	NSUInteger			theMatchCountBefore = 0,
+						theMatchCountAfter = 0;
 	NSNumber			* theMin = [theHeap minimumObject];
 	for( NSNumber * theNumber in theHeap )
 	{
 		NSCParameterAssert(theNumber.integerValue >= theMin.integerValue);
-		theMatchCount[0] += theNumber.integerValue == theMin.integerValue;
+		theMatchCountBefore += theNumber.integerValue == theMin.integerValue;
 	}
 	[theHeap removeMinimumObject];
 	for( NSNumber * theNumber in theHeap )
 	{
 		NSCParameterAssert(theNumber.integerValue >= theMin.integerValue);
-		theMatchCount[1] += theNumber.integerValue == theMin.integerValue;
+		theMatchCountAfter += theNumber.integerValue == theMin.integerValue;
 	}
-	NSCParameterAssert(theMatchCount[0] == theMatchCount[1]+1);
+	NSCParameterAssert(theMatchCountBefore == theMatchCountAfter+1);
 
-	theMatchCount[1] = 0;
+	theMatchCountBefore = 0;
 	theMin = [theHeap minimumObject];
-	[theHeap removeMinimumObject];
 	for( NSNumber * theNumber in theHeap )
 	{
 		NSCParameterAssert(theNumber.integerValue >= theMin.integerValue);
-		theMatchCount[1] += theNumber.integerValue == theMin.integerValue;
+		theMatchCountBefore += theNumber.integerValue == theMin.integerValue;
 	}
-	NSCParameterAssert(theMatchCount[0] == theMatchCount[1]+1);
+	[theHeap removeMinimumObject];
+	theMatchCountAfter = 0;
+	for( NSNumber * theNumber in theHeap )
+	{
+		NSCParameterAssert(theNumber.integerValue >= theMin.integerValue);
+		theMatchCountAfter += theNumber.integerValue == theMin.integerValue;
+	}
+	NSCParameterAssert(theMatchCountBefore == theMatchCountAfter+1);
 }
 
 void testPopMinimumObject()
